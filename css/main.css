@@ -1,0 +1,19 @@
+#content {
+  height: 100%; /*745px;*/
+
+  background-image: url('https://drive.google.com/uc?id=1g02diikSgwwERk9_9MeGm0pNe9UosDII'); /* url('https://drive.google.com/uc?id=1_XSocvIe_odE87_2p6w4qjxT4nmmvejK'); url('https://drive.google.com/uc?id=1_XSocvIe_odE87_2p6w4qjxT4nmmvejK'); 'https://drive.google.com/uc?id=1KVfccmmca2fcP9B4NjXseKHttbb5lZpw' */ 
+  background-size: 100% 100%;
+
+  background-position: 0 0;
+  width: 4000px;
+  background-repeat: no-repeat;
+
+}
+html, body, #page, #page_contents{
+	height: 100%;
+  overflow: hidden;
+}
+
+.swal-overlay {
+  background-color: rgba(43, 165, 137, 1);
+}
