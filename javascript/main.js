@@ -6,7 +6,10 @@ var margin = 300;
 var hiddenObjects = [];
 var romoActive = false;
 var lunaActive = false;
+var OriginalYRes = 864;
 
+var OrigCatWidth = 62;
+var OrigCatHeight = 84;
 
 contentDiv.addEventListener("mousemove", (event) =>{
     positionX = event.clientX;
@@ -61,6 +64,8 @@ function adjustHiddenObjects(backgroundPos)
 
 // Cat Logic
 // OrgY = 864
+
+// TODO: Replace OriginalYRes = 695;
 var catPlacements = [
   {x: 358, y: 353, img: '//drive.google.com/uc?id=18FkJtD2XrMS2y088kHWLI2HPH8vkbRfF', type: 'Romo'}, 
   {x: 470, y: 433, img: '//drive.google.com/uc?id=1-02Vb-9NxIA4CU1MGcwV6lRiHWh_uTa0', type: 'Luna'}, 
@@ -111,8 +116,35 @@ function introModal ()
 
 }
 
+function windowResizeStyles() {
+  //heightOutput.textContent = window.innerHeight;
+  //widthOutput.textContent = window.innerWidth;
+
+  for (var i = 0; i < hiddenObjects.length; i++) {
+    let newCatYPos = catPlacements[i].y * window.innerHeight / OriginalYRes;
+
+      // let newCatWidth = OrigCatWidth * window.innerWidth / OriginalYRes;
+      let newCatHeight = OrigCatHeight * window.innerHeight / OriginalYRes;
+
+// OrigCatWidth
+    // hiddenObjects[i].style.width = 
+    hiddenObjects[i].style.height = newCatHeight + "px";
+
+    hiddenObjects[i].style.top = newCatYPos + "px"; 
+    hiddenObjects[i].style.backgroundSize = "62px " + newCatHeight + "px";
+
+  }
+  
+}
+
+window.onresize = windowResizeStyles;
+
 function createHiddenObject(props) 
 {
+
+  // Get the potsiton & recal on resize.
+
+
   let element = document.createElement('div');
   element.style.position = "absolute";
   element.style.left = props.x + "px";
@@ -126,7 +158,7 @@ function createHiddenObject(props)
 
   element.addEventListener('click', hiddenObjectClickHandler); // Can Add Gal type here need to figure out event, galTypepassing
   element.style.backgroundImage = "url('" + props.img +"')";
-
+  element.style.backgroundSize = "62px 84px";
   
   contentDiv.appendChild(element);
 
@@ -181,12 +213,12 @@ function generateAndPlaceCats()
   for (var i = 0; i < placements.length; i++) {
     createHiddenObject(placements[i]);
   }
+  windowResizeStyles();
 }
 
 // Hack use event loader in the future.... Ask Ricardo more!
 // setTimeout(function(){ createHiddenObject(catPlacements[6]); }, 800);
 setTimeout(function(){ generateAndPlaceCats(); }, 800);
 setTimeout(function(){ introModal(); }, 200);
-
 
 
